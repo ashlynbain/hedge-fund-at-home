@@ -1,0 +1,40 @@
+# Copy to config/config.yaml and customize.
+# Default mode is simulated (education; no broker connection).
+
+mode: simulated          # simulated | paper | live
+
+strategy:
+  module: strategies.example_mean_reversion.strategy
+  class_name: ExampleMeanReversionStrategy
+  symbols:
+    - SPY
+  params:
+    lookback: 20
+    entry_z: 2.0
+    exit_z: 0.5
+    quantity: 10
+
+risk:
+  max_position_per_symbol: 10000
+  max_gross_exposure: 50000
+  max_daily_loss: 500
+  max_trades_per_day: 50
+
+execution:
+  default_order_type: LMT
+  limit_offset_bps: 5
+
+ibkr:
+  host: ${IBKR_HOST:-127.0.0.1}
+  port: ${IBKR_PORT:-7497}
+  client_id: ${IBKR_CLIENT_ID:-1}
+  use_real: ${IBKR_USE_REAL:-false}
+
+aws:
+  enabled: ${AWS_SECRETS_ENABLED:-false}
+  region: ${AWS_REGION:-us-east-1}
+  secrets_name: ${AWS_SECRETS_NAME:-}
+
+poll_seconds: 300
+bar_lookback_days: 120
+log_level: ${LOG_LEVEL:-INFO}
