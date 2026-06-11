@@ -9,3 +9,4 @@ alwaysApply: true
 - **Never** add `Co-authored-by:` trailers (including Cursor, cursoragent, or any AI).
 - **Never** push to GitHub on the user's behalf unless they explicitly ask.
 - When the user asks for a commit, use a normal `git commit` message with no co-author lines.
+- Cursor may inject `Co-authored-by: Cursor` into `git commit` automatically. If that happens, rewrite the commit with `git commit-tree` (not `git commit --amend`) so only Ashlyn Bain appears in history.
