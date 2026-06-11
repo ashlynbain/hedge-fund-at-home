@@ -35,7 +35,8 @@ hfah-run = "hedgekit.cli.run:main"
 hfah-backtest = "hedgekit.cli.backtest:main"
 
 [tool.setuptools.packages.find]
-include = ["hedgekit*"]
+where = ["."]
+include = ["hedgekit*", "strategies*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
