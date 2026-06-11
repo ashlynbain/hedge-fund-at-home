@@ -35,7 +35,7 @@
       <header class="game-header">
         <p class="eyebrow">Learn quest · simulated map</p>
         <h1>Hedge Fund at Home</h1>
-        <p class="subtitle">A cozy study adventure. Explore pairs trading, run Python in the Code lab, replay the trading floor — then clone the kit for deeper work.</p>
+        <p class="subtitle">A cozy study adventure. Follow the map, study the sample strategy, run Python in the Code lab — then clone the kit for deeper work.</p>
         <p class="github-banner">
           <a
             class="github-link github-link-hero"
@@ -60,6 +60,29 @@
         <div class="hud-label">Study XP</div>
         <div class="xp-bar"><div id="progress-fill" class="xp-fill"></div></div>
         <p id="progress-label" class="xp-text">Explore each tab to fill your bar</p>
+      </div>
+
+      <div id="lofi-dock" class="lofi-dock" aria-label="Background study music">
+        <button type="button" id="lofi-toggle" class="lofi-toggle" aria-pressed="false" title="Toggle study lofi">
+          <span class="lofi-icon" aria-hidden="true">♪</span>
+          <span id="lofi-label">Lofi off</span>
+        </button>
+        <label class="lofi-vol-wrap" id="lofi-vol-wrap" hidden>
+          <span class="lofi-vol-label" aria-hidden="true">Vol</span>
+          <input type="range" id="lofi-volume" min="0" max="100" value="35" aria-label="Lofi volume" />
+        </label>
+        <label class="lofi-station-wrap">
+          <span class="sr-only">Lofi station</span>
+          <select id="lofi-station" class="lofi-station" aria-label="Lofi station"></select>
+        </label>
+        <a
+          class="lofi-credit"
+          href="https://somafm.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Free listener-supported radio"
+        >SomaFM</a>
+        <audio id="lofi-audio" preload="none"></audio>
       </div>
 
       <div class="learn-layout">
@@ -245,6 +268,7 @@
       })();
     </script>
     <script src="pairs-floor.js"></script>
+    <script src="lofi-player.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

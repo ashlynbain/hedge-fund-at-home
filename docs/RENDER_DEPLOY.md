@@ -9,10 +9,11 @@ Static ZIP hosting (Hostinger, etc.) cannot run Python — use Render for the in
 
 | Tab | Hosted on Render |
 | --- | ---------------- |
-| Pairs | Deep dive + spread playground (JavaScript) |
+| Map / Strategy / Pairs / Stat arb | Full learn curriculum |
 | Code lab | **Live Python** via `/api/run` on the same service |
+| Trading floor | Chart replay (live `/api/snapshot` on Render) |
+| Lofi player | Background SomaFM streams (browser click-to-play) |
 | Scrolls | Captured sample output at build time |
-| Trading floor | Chart replay (snapshot embedded at build) |
 
 ## One-click blueprint
 

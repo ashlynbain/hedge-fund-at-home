@@ -41,7 +41,7 @@ window.HFAH_LEARN = {
       id: "mean-reversion",
       title: "Walkthrough: example mean reversion",
       summary:
-        "The sample strategy is single-name mean reversion, not pairs trading. It teaches z-scores and position rules you will reuse later.",
+        "The sample strategy trades one symbol with z-score mean reversion: enter when price stretches from its recent average, exit when it comes back.",
       params: [
         { name: "lookback", default: "20", meaning: "Bars used to compute mean and standard deviation of close." },
         { name: "entry_z", default: "2.0", meaning: "Enter when |z| exceeds this (price stretched vs recent mean)." },
@@ -80,7 +80,7 @@ if |z| < exit_z and position != 0: flatten`,
       title: "Pairs trading vs single-name mean reversion",
       summary:
         "Pairs trading bets on the relationship between two instruments, not the direction of one stock. " +
-        "It is a classic market-neutral stat-arb pattern — and a natural step after the single-symbol example.",
+        "It uses the same z-score idea as the single-symbol example — applied to the spread between two legs.",
       compare: [
         {
           term: "Mean reversion (shipped example)",
@@ -229,8 +229,8 @@ if z < -entry_z: long A, short B`,
         {
           title: "How it connects to this kit",
           body:
-            "The example mean-reversion strategy is a toy version of one stat-arb idea on a single symbol. Pairs trading is another " +
-            "classic stat-arb pattern on two names. Real desks combine dozens of signals.",
+            "The example mean-reversion strategy is a toy version of one stat-arb idea on a single symbol. The pairs lesson you just read " +
+            "is the two-name version of the same spread-and-z-score workflow. Real desks combine dozens of signals.",
           callout: "This repo: one symbol z-score in strategies/example_mean_reversion/",
         },
         {

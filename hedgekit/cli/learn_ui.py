@@ -10,7 +10,10 @@ from functools import partial
 from http import HTTPStatus
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
+
+from .learn_assets import WEB_ROOT as _ASSET_WEB_ROOT
+from .learn_assets import build_trading_floor_html
 
 import click
 
@@ -244,9 +247,36 @@ def _cors_origin() -> str | None:
 
 class _StudioHandler(SimpleHTTPRequestHandler):
     api_only: bool = False
+    fallback_directory: str | None = None
 
     def __init__(self, *args, directory: str | None = None, **kwargs):
         super().__init__(*args, directory=directory or str(WEB_ROOT), **kwargs)
+
+    def _fallback_path(self, rel: str) -> Path | None:
+        root = self.fallback_directory or str(_ASSET_WEB_ROOT)
+        candidate = Path(root) / rel
+        if candidate.is_file():
+            return candidate
+        return None
+
+    def _serve_bytes(self, body: bytes, content_type: str) -> None:
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _serve_trading_floor(self) -> None:
+        html = build_trading_floor_html(preload_snapshot=False).encode("utf-8")
+        self._serve_bytes(html, "text/html; charset=utf-8")
+
+    def _serve_fallback_file(self, rel: str) -> bool:
+        path = self._fallback_path(rel)
+        if not path:
+            return False
+        content_type = self.guess_type(str(path))
+        self._serve_bytes(path.read_bytes(), content_type)
+        return True
 
     def log_message(self, format: str, *args) -> None:
         if os.getenv("HFAH_UI_QUIET", "").lower() != "true":
@@ -309,6 +339,16 @@ class _StudioHandler(SimpleHTTPRequestHandler):
         if self.api_only:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
+        rel = unquote(parsed.path.lstrip("/")).split("?", 1)[0]
+        if rel == "trading-floor.html":
+            self._serve_trading_floor()
+            return
+        local = Path(self.directory) / rel if rel else Path(self.directory)
+        if rel and not local.is_file():
+            shared = ("api-client.js", "trading-floor.js", "pairs-floor.js", "styles.css")
+            if rel in shared or rel.startswith("assets/"):
+                if self._serve_fallback_file(rel):
+                    return
         super().do_GET()
 
     def _serve_view(self, rel_path: str) -> None:

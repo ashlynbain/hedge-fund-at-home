@@ -411,7 +411,9 @@
     window.addEventListener("resize", resizeCanvases);
     const grid = document.querySelector("#pairs-floor .chart-grid");
     if (grid && typeof ResizeObserver !== "undefined") {
-      new ResizeObserver(() => resizeCanvases()).observe(grid);
+      new ResizeObserver(() => {
+        requestAnimationFrame(() => resizeCanvases());
+      }).observe(grid);
     }
 
     const labTab = document.querySelector('.nav-btn[data-panel="panel-lab"]');

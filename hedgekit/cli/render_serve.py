@@ -17,17 +17,25 @@ DIST_LEARN = PROJECT_ROOT / "dist" / "learn"
 LEARN_WEB = WEB_ROOT / "learn"
 
 
-def _static_root() -> Path:
+def _static_root(*, no_build: bool = False) -> Path:
+    # Local --no-build: serve web/learn for live edits. On Render ($PORT set), use dist/ after build.
+    on_render = bool(os.environ.get("PORT"))
+    if (
+        no_build
+        and not on_render
+        and LEARN_WEB.is_dir()
+        and (LEARN_WEB / "index.html").is_file()
+    ):
+        return LEARN_WEB
     if DIST_LEARN.is_dir() and (DIST_LEARN / "index.html").is_file():
         return DIST_LEARN
     return LEARN_WEB
 
 
 def _write_render_static_config(root: Path) -> None:
-    """Enable the code lab when API is co-hosted on the same origin."""
+    """Co-hosted API: trading floor loads replay via /api/snapshot (not static data/)."""
     cfg = """window.HFAH_STATIC = {
-  enabled: true,
-  snapshotScript: "data/snapshot-data.js",
+  enabled: false,
   labDisabled: false,
   labMessage: "Code lab connects to this server. If it fails, wait for a cold start and retry."
 };
@@ -66,7 +74,7 @@ def main(port: int | None, host: str | None, no_build: bool, open_browser: bool)
             click.echo("Building learn site...")
             subprocess.run([sys.executable, str(build)], cwd=str(PROJECT_ROOT), check=False)
 
-    static_root = _static_root()
+    static_root = _static_root(no_build=no_build)
     if not static_root.is_dir():
         raise click.ClickException(f"Learn site not found at {static_root}")
 
@@ -81,6 +89,7 @@ def main(port: int | None, host: str | None, no_build: bool, open_browser: bool)
         )
 
     _StudioHandler.api_only = False
+    _StudioHandler.fallback_directory = str(WEB_ROOT)
     handler = partial(_StudioHandler, directory=str(static_root))
     httpd = ThreadingHTTPServer((host, listen_port), handler)
 

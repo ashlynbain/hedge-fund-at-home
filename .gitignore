@@ -19,3 +19,4 @@ infrastructure/aws/terraform.tfvars
 *.pem
 credentials*.json
 .DS_Store
+web/learn/trading-floor.html

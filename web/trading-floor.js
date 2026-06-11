@@ -347,7 +347,9 @@
       "#panel-trading .chart-grid, body.tf-page .chart-grid"
     );
     if (grid && typeof ResizeObserver !== "undefined") {
-      resizeObserver = new ResizeObserver(() => resizeCanvases());
+      resizeObserver = new ResizeObserver(() => {
+        requestAnimationFrame(() => resizeCanvases());
+      });
       resizeObserver.observe(grid);
     }
 

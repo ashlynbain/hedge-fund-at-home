@@ -37,10 +37,6 @@ def _slug(doc_path: str) -> str:
     return doc_path.replace(".md", "").replace(".py", "_py").replace("/", "_") + ".html"
 
 
-PARTIAL_TRADING = SHARED_WEB / "partials" / "trading-floor-panel.html"
-TRADING_FLOOR_TEMPLATE = SHARED_WEB / "trading-floor.html"
-
-
 LEARNING_DATA_TAG = '    <script src="learning-data.js" id="learn-data-script"></script>'
 
 
@@ -51,17 +47,6 @@ def _inline_learning_data(html: str) -> str:
         raise SystemExit("index.html missing learning-data.js script tag")
     inline = f'    <script id="learn-data-script">\n{data_js}\n    </script>'
     return html.replace(LEARNING_DATA_TAG, inline, 1)
-
-
-def _build_trading_floor_html(*, preload_snapshot: bool) -> str:
-    partial = PARTIAL_TRADING.read_text(encoding="utf-8")
-    html = TRADING_FLOOR_TEMPLATE.read_text(encoding="utf-8")
-    marker = "    <div class=\"tf-shell\">\n"
-    if partial.strip() not in html:
-        html = html.replace(marker, marker + partial + "\n", 1)
-    preload = '    <script src="data/snapshot-data.js"></script>\n' if preload_snapshot else ""
-    html = html.replace("    <!-- SNAPSHOT_PRELOAD -->\n", preload)
-    return html
 
 
 def _capture_outputs() -> dict[str, str]:
@@ -104,6 +89,7 @@ def main() -> None:
     os.chdir(ROOT)
     os.environ.setdefault("HFAH_CONFIG", str(ROOT / "config" / "config.yaml.example"))
 
+    from hedgekit.cli.learn_assets import build_trading_floor_html
     from hedgekit.ui.doc_serve import render_view
     from hedgekit.ui.snapshot import build_trading_snapshot
 
@@ -129,7 +115,7 @@ def main() -> None:
                 shutil.copy2(src, LEARN_WEB / "styles.css")
 
     (OUT / "trading-floor.html").write_text(
-        _build_trading_floor_html(preload_snapshot=True),
+        build_trading_floor_html(preload_snapshot=True),
         encoding="utf-8",
     )
 

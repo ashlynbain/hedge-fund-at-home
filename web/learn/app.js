@@ -998,7 +998,10 @@ function renderHandsOn() {
 }
 
 window.addEventListener("error", (e) => {
-  showLoadError(`Script error: ${e.message || "unknown"} — check browser console (F12).`);
+  const msg = e.message || "";
+  // Benign Chrome warning when chart ResizeObserver resizes canvases in the same frame.
+  if (msg.includes("ResizeObserver loop")) return;
+  showLoadError(`Script error: ${msg || "unknown"} — check browser console (F12).`);
 });
 
 document.addEventListener("DOMContentLoaded", () => {

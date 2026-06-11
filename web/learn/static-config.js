@@ -1,5 +1,5 @@
 window.HFAH_STATIC = {
-  enabled: true,
-  snapshotScript: "data/snapshot-data.js",
-  labDisabled: true
+  enabled: false,
+  labDisabled: false,
+  labMessage: "Code lab connects to this server. If it fails, wait for a cold start and retry."
 };
