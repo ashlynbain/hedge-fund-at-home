@@ -1,0 +1,27 @@
+"""Template: copy to your project and implement submit() for your broker's paper API.
+
+Rename to e.g. my_brokers/alpaca.py, then set:
+
+  BROKER_ADAPTER=custom
+  BROKER_CUSTOM_MODULE=my_brokers.alpaca:MyPaperBroker
+
+Not financial advice. Paper trade only until you fully understand the risks.
+"""
+from __future__ import annotations
+
+from hedgekit.core.schemas import OrderIntent, OrderStatus
+
+
+class MyPaperBroker:
+    """Placeholder — wire your broker's REST/WebSocket SDK here."""
+
+    def __init__(self) -> None:
+        # api_key = os.environ["ALPACA_API_KEY"]  # example
+        pass
+
+    def submit(self, intent: OrderIntent) -> OrderStatus:
+        # TODO: map intent.legs to your broker's order API (paper endpoint).
+        # Return OrderStatus with SUBMITTED, FILLED, or REJECTED.
+        raise NotImplementedError(
+            "Implement submit() for your paper broker. See hedgekit/broker/ibkr.py for a reference."
+        )

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hedge Fund at Home | Learn Quest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="learn.css" />
+  </head>
+  <body class="learn-site">
+    <div class="flower-layer" aria-hidden="true">
+      <svg class="flower f1" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f2" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f3" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f4" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+    </div>
+    <svg style="display:none" aria-hidden="true">
+      <symbol id="flower-icon" viewBox="0 0 64 64">
+        <circle cx="32" cy="14" r="10" fill="#f8b4d9"/>
+        <circle cx="14" cy="32" r="10" fill="#f5a6cf"/>
+        <circle cx="50" cy="32" r="10" fill="#f5a6cf"/>
+        <circle cx="20" cy="50" r="10" fill="#e8b4f8"/>
+        <circle cx="44" cy="50" r="10" fill="#e8b4f8"/>
+        <circle cx="32" cy="32" r="11" fill="#ffd4e8"/>
+      </symbol>
+    </svg>
+
+    <div class="game-shell">
+      <header class="game-header">
+        <p class="eyebrow">Learn quest · simulated map</p>
+        <h1>Hedge Fund at Home</h1>
+        <p class="subtitle">A cozy study adventure. Explore pairs trading, run Python in the Code lab, replay the trading floor — then clone the kit for deeper work.</p>
+        <p class="github-banner">
+          <a
+            class="github-link github-link-hero"
+            href="https://github.com/ashlynbain/hedge-fund-at-home"
+            target="_blank"
+            rel="noopener noreferrer"
+          >★ View source on GitHub</a>
+        </p>
+      </header>
+
+      <div class="dialog-box disclaimer-box" role="note">
+        <div class="dialog-portrait" aria-hidden="true"></div>
+        <div class="dialog-text">
+          <strong>Not financial advice</strong>
+          <p id="disclaimer-text">Loading…</p>
+        </div>
+      </div>
+
+      <div id="load-error" class="load-error" hidden></div>
+
+      <div class="hud">
+        <div class="hud-label">Study XP</div>
+        <div class="xp-bar"><div id="progress-fill" class="xp-fill"></div></div>
+        <p id="progress-label" class="xp-text">Explore each tab to fill your bar</p>
+      </div>
+
+      <div class="learn-layout">
+        <aside class="learn-sidebar" aria-label="Sections">
+          <nav class="sidebar-nav">
+            <p class="sidebar-heading">Curriculum</p>
+            <button type="button" class="nav-btn sidebar-btn active" data-panel="panel-path">Map</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-strategy">Strategy</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-pairs">Pairs</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-stat-arb">Stat arb</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-architecture">Live stack</button>
+
+            <p class="sidebar-heading">Labs</p>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-lab">Code lab</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-trading">Trading floor</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-outputs">Scrolls</button>
+
+            <p class="sidebar-heading">Reference</p>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-glossary">Grimoire</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-resources">Resources</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-setup">Setup</button>
+            <button type="button" class="nav-btn sidebar-btn" data-panel="panel-hands-on">Home base</button>
+          </nav>
+        </aside>
+
+        <main class="learn-main">
+      <section id="panel-path" class="panel active">
+        <div id="lesson-pipeline" class="lesson-block quest-panel">
+          <p class="panel-hint">Loading quest map…</p>
+        </div>
+      </section>
+
+      <section id="panel-strategy" class="panel">
+        <div id="lesson-strategy" class="lesson-block quest-panel"></div>
+        <div id="z-playground" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-pairs" class="panel">
+        <p class="panel-hint">Pairs trading: two legs, spread z-scores, and classic examples. Educational only.</p>
+        <div id="lesson-pairs" class="lesson-block quest-panel"></div>
+        <div id="spread-playground" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-stat-arb" class="panel">
+        <p class="panel-hint">Stat arb concepts and strategy patterns to research next. Not a trade recommendation.</p>
+        <div id="lesson-stat-arb" class="lesson-block quest-panel"></div>
+        <div id="lesson-innovative" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-architecture" class="panel">
+        <p class="panel-hint">How many hedge funds wire live trading: Python services, Kafka, Kubernetes on AWS, Interactive Brokers. Educational overview.</p>
+        <div id="lesson-architecture" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-lab" class="panel">
+        <p class="panel-hint">Pairs replay floor + Python snippets. Load replay, scrub the timeline, then run demos below.</p>
+        <div id="pairs-floor" class="lesson-block quest-panel pairs-floor-shell">
+          <h2>Pairs trading floor</h2>
+          <p class="lesson-summary">Watch both legs, the spread, and z-score over time — like the main trading floor, but for pairs.</p>
+          <div class="trading-status-bar">
+            <span id="pf-status-led" class="status-led" aria-hidden="true"></span>
+            <span class="status-tag">PAIRS</span>
+            <span class="status-mode">SIMULATED</span>
+            <span id="pf-status" class="status-msg">Open this tab to load replay</span>
+          </div>
+          <div class="ticker-wrap" aria-live="polite">
+            <div id="pf-ticker" class="ticker-tape">PAIRS REPLAY — EDUCATIONAL ONLY</div>
+          </div>
+          <div id="pf-quote" class="quote-panel"></div>
+          <div class="chart-grid">
+            <div class="chart-panel main-chart">
+              <div class="chart-label">Leg prices (<span class="pf-legend-a">A</span> + <span class="pf-legend-b">B</span>)</div>
+              <canvas id="pf-chart-legs" class="chart-canvas pf-chart-canvas" width="800" height="220"></canvas>
+            </div>
+            <div class="chart-panel">
+              <div class="chart-label">Spread (A − β×B)</div>
+              <canvas id="pf-chart-spread" class="chart-canvas pf-chart-canvas" width="400" height="120"></canvas>
+            </div>
+            <div class="chart-panel">
+              <div class="chart-label">Z-score</div>
+              <canvas id="pf-chart-z" class="chart-canvas pf-chart-canvas" width="400" height="120"></canvas>
+            </div>
+          </div>
+          <div class="tf-controls pf-controls">
+            <label>Pair
+              <select id="pf-pair">
+                <option value="ko_pep">KO / PEP</option>
+                <option value="xom_cvx">XOM / CVX</option>
+                <option value="gld_gdx">GLD / GDX</option>
+              </select>
+            </label>
+            <label>Lookback <input type="number" id="pf-lookback" value="60" min="20" max="200" /></label>
+            <label>Entry |z| <input type="number" id="pf-entry-z" value="2" min="1" max="4" step="0.1" /></label>
+            <label><input type="checkbox" id="pf-use-live" /> Live yfinance</label>
+            <button type="button" class="action-btn" id="pf-btn-load">Load replay</button>
+            <button type="button" class="action-btn primary" id="pf-btn-play">PLAY REPLAY</button>
+            <label class="speed-label">Speed
+              <select id="pf-play-speed">
+                <option value="200">Slow</option>
+                <option value="120" selected>Normal</option>
+                <option value="60">Fast</option>
+              </select>
+            </label>
+            <input type="range" id="pf-play-scrub" min="0" max="100" value="0" />
+          </div>
+          <p id="pf-meta" class="tf-meta"></p>
+          <div class="blotter-wrap">
+            <div class="chart-label">Pair signals (teaching blotter)</div>
+            <div id="pf-blotter" class="trade-blotter"></div>
+          </div>
+        </div>
+        <div id="code-lab" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-glossary" class="panel">
+        <p class="panel-hint">Tap a card to reveal the definition. Check off terms you know.</p>
+        <div id="glossary" class="glossary-grid"></div>
+      </section>
+
+      <section id="panel-resources" class="panel">
+        <p class="panel-hint">Books, docs, and repo modules to continue learning after the interactive tabs.</p>
+        <div id="resources" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-outputs" class="panel">
+        <p class="panel-hint">When you run the kit on your computer, aim for output like this.</p>
+        <div id="expected-outputs"></div>
+      </section>
+
+      <section id="panel-trading" class="panel">
+        <p class="panel-hint">
+          Same simulated trading floor as the local quest studio — ticker, charts, replay controls, and blotter.
+        </p>
+        <iframe
+          class="trading-floor-embed"
+          src="trading-floor.html"
+          title="Simulated trading floor"
+        ></iframe>
+      </section>
+
+      <section id="panel-setup" class="panel">
+        <p class="panel-hint">Clone → broker (paper first) → cloud. Check off each step as you go. Open linked docs on GitHub for full detail.</p>
+        <div id="lesson-setup" class="lesson-block quest-panel"></div>
+      </section>
+
+      <section id="panel-hands-on" class="panel">
+        <div id="hands-on" class="lesson-block quest-panel"></div>
+        <p class="github-line">
+          <a class="github-link github-link-footer action-btn primary" href="https://github.com/ashlynbain/hedge-fund-at-home" target="_blank" rel="noopener noreferrer">★ Clone on GitHub — run the full kit locally</a>
+        </p>
+      </section>
+
+      <footer class="game-footer">Educational software. MIT License. Not financial advice.</footer>
+        </main>
+      </div>
+    </div>
+
+    <script src="static-config.js"></script>
+    <script src="api-client.js"></script>
+    <script src="learning-data.js" id="learn-data-script"></script>
+    <script>
+      (function () {
+        function show(msg) {
+          var el = document.getElementById("load-error");
+          if (el) {
+            el.hidden = false;
+            el.textContent = msg;
+          }
+        }
+        if (window.HFAH_LEARN || window.HFAH_HOSTINGER) return;
+        var s = document.getElementById("learn-data-script");
+        if (s && s.src && location.protocol !== "file:") {
+          show(
+            "Lesson data did not load. Open DevTools (F12) → Network and check learning-data.js. " +
+              "On your host: re-extract learn-site.zip into public_html so index.html and app.js are in the same folder."
+          );
+        } else {
+          show(
+            "Lesson data did not load. For local preview run: python scripts/build_learn_site.py " +
+              "then cd dist/learn && python3 -m http.server 9876 — do not double-click index.html."
+          );
+        }
+      })();
+    </script>
+    <script src="pairs-floor.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

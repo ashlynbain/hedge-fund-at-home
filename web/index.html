@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hedge Fund at Home | Quest Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="flower-layer" aria-hidden="true">
+      <svg class="flower f1" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f2" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f3" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+      <svg class="flower f4" viewBox="0 0 64 64"><use href="#flower-icon"/></svg>
+    </div>
+    <svg style="display:none" aria-hidden="true">
+      <symbol id="flower-icon" viewBox="0 0 64 64">
+        <circle cx="32" cy="14" r="10" fill="#f8b4d9"/>
+        <circle cx="14" cy="32" r="10" fill="#f5a6cf"/>
+        <circle cx="50" cy="32" r="10" fill="#f5a6cf"/>
+        <circle cx="20" cy="50" r="10" fill="#e8b4f8"/>
+        <circle cx="44" cy="50" r="10" fill="#e8b4f8"/>
+        <circle cx="32" cy="32" r="11" fill="#ffd4e8"/>
+      </symbol>
+    </svg>
+
+    <div class="game-shell">
+      <header class="game-header">
+        <p class="eyebrow">Quest log / education mode</p>
+        <h1>Hedge Fund at Home</h1>
+        <p class="subtitle">Simulated trading adventure. No real money on this map.</p>
+      </header>
+
+      <div class="dialog-box disclaimer-box" role="note">
+        <div class="dialog-portrait" aria-hidden="true"></div>
+        <div class="dialog-text">
+          <strong>Not financial advice</strong>
+          <p id="disclaimer-text"></p>
+        </div>
+      </div>
+
+      <div class="hud">
+        <div class="hud-label">Learning XP</div>
+        <div class="xp-bar"><div id="progress-fill" class="xp-fill"></div></div>
+        <p id="progress-label" class="xp-text">0 / 7 quests</p>
+      </div>
+
+      <nav class="game-nav" aria-label="Sections">
+        <button type="button" class="nav-btn active" data-panel="panel-quests">Quests</button>
+        <button type="button" class="nav-btn" data-panel="panel-trading">Trading floor</button>
+        <button type="button" class="nav-btn" data-panel="panel-lab">Code lab</button>
+        <button type="button" class="nav-btn" data-panel="panel-topics">Study grimoire</button>
+        <button type="button" class="nav-btn" data-panel="panel-journal">Journal</button>
+      </nav>
+
+      <section id="panel-quests" class="panel active">
+        <div id="pipeline" class="pipeline-quest"></div>
+        <div id="stages" class="quest-list"></div>
+      </section>
+
+      <section id="panel-trading" class="panel">
+        <iframe
+          class="trading-floor-embed"
+          src="trading-floor.html"
+          title="Simulated trading floor"
+        ></iframe>
+      </section>
+
+      <section id="panel-lab" class="panel">
+        <div class="dialog-box lab-intro">
+          <p>
+            Run <strong>whitelisted</strong> commands on your machine through this UI.
+            Output appears in the console below. Simulated mode only. Needs
+            <code>pip install -e ".[dev]"</code> and <code>config/config.yaml</code> first.
+            Tests need <code>pytest</code> (included in the <code>dev</code> extra).
+          </p>
+        </div>
+
+        <div class="lab-actions">
+          <button type="button" class="action-btn" data-action="version">Check install</button>
+          <button type="button" class="action-btn primary" data-action="run_once">Run once (simulated)</button>
+          <button type="button" class="action-btn" data-action="backtest">Simulated backtest</button>
+          <button type="button" class="action-btn" data-action="pytest">Run tests</button>
+        </div>
+
+        <div class="backtest-opts">
+          <label>Backtest start <input type="text" id="bt-start" value="2023-01-01" /></label>
+          <label>Backtest end <input type="text" id="bt-end" value="2024-12-31" /></label>
+        </div>
+
+        <div class="console-wrap">
+          <div class="console-title">Output console</div>
+          <pre id="console-out" class="console" aria-live="polite">Press a button to run a command...</pre>
+        </div>
+      </section>
+
+      <section id="panel-topics" class="panel">
+        <p class="panel-hint">Expand each tome. Research phrases in your browser.</p>
+        <div id="topics" class="topic-grid"></div>
+      </section>
+
+      <section id="panel-journal" class="panel">
+        <div class="dialog-box">
+          <p>Write answers in a notebook. No real capital required.</p>
+          <ul id="journal" class="journal-list"></ul>
+        </div>
+      </section>
+
+      <footer class="game-footer">Educational software. MIT License. Not financial advice.</footer>
+    </div>
+
+    <script src="static-config.js"></script>
+    <script src="api-client.js"></script>
+    <script src="learning-data.js"></script>
+    <script src="trading-floor.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

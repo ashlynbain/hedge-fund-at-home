@@ -1,0 +1,11 @@
+---
+description: Git commits must be Ashlyn Bain only — never add Cursor co-authors
+alwaysApply: true
+---
+
+# Git authorship
+
+- Commits on this repository must list **Ashlyn Bain** (`bain.ashlyn11@gmail.com`) as the sole author and committer.
+- **Never** add `Co-authored-by:` trailers (including Cursor, cursoragent, or any AI).
+- **Never** push to GitHub on the user's behalf unless they explicitly ask.
+- When the user asks for a commit, use a normal `git commit` message with no co-author lines.

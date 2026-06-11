@@ -1,0 +1,13 @@
+aws_region   = "us-east-1"
+project_name = "hedge-fund-at-home"
+secrets_name = "hedge-fund-at-home/dev"
+
+# Replace with your ECR image after building docker/Dockerfile
+container_image = "123456789012.dkr.ecr.us-east-1.amazonaws.com/hedge-fund-at-home:latest"
+
+initial_secret_payload = {
+  IBKR_HOST      = "127.0.0.1"
+  IBKR_PORT      = "7497"
+  IBKR_CLIENT_ID = "1"
+  IBKR_USE_REAL  = "false"
+}

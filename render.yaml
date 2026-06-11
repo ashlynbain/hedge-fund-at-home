@@ -1,0 +1,17 @@
+# Render blueprint: interactive learn site with Python code lab.
+# Docs: docs/RENDER_DEPLOY.md
+services:
+  - type: web
+    name: hedge-fund-at-home-learn
+    runtime: python
+    plan: free
+    buildCommand: pip install -e ".[dev]" && cp config/config.yaml.example config/config.yaml && python scripts/build_learn_site.py
+    startCommand: python -m hedgekit.cli.render_serve --no-build
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: HFAH_CONFIG
+        value: config/config.yaml.example
+      - key: HFAH_UI_QUIET
+        value: "true"

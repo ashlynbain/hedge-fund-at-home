@@ -1,0 +1,16 @@
+# Local development: runner in simulated mode by default.
+# Not financial advice. See DISCLAIMER.md.
+
+services:
+  runner:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    env_file: .env
+    environment:
+      HFAH_CONFIG: /app/config/config.yaml
+      AWS_SECRETS_ENABLED: "false"
+    volumes:
+      - ./config/config.yaml:/app/config/config.yaml:ro
+      - ./strategies:/app/strategies:ro
+    command: ["python", "-m", "hedgekit.cli.run", "--once"]
