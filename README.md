@@ -87,8 +87,9 @@ hedge-fund-at-home/
   docs/               # Setup & education guides
   infrastructure/     # AWS Terraform (+ cloud notes)
   tests/
-  web/                # Optional education UI — see web/README.md
 ```
+
+The hosted learn site is maintained separately (not in this public repo).
 
 ## Safety
 

@@ -9,7 +9,7 @@ description = "Hedge Fund at Home: educational systematic trading kit with simul
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
-authors = [{name = "Hedge Fund at Home Contributors"}]
+authors = [{name = "Ashlyn Bain"}]
 dependencies = [
     "pandas>=2.0",
     "numpy>=1.24",
@@ -33,8 +33,6 @@ dev = [
 [project.scripts]
 hfah-run = "hedgekit.cli.run:main"
 hfah-backtest = "hedgekit.cli.backtest:main"
-hfah-learn-ui = "hedgekit.cli.learn_ui:main"
-hfah-render-serve = "hedgekit.cli.render_serve:main"
 
 [tool.setuptools.packages.find]
 include = ["hedgekit*"]
