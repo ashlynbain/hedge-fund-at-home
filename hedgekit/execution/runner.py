@@ -60,7 +60,7 @@ class TradingRunner:
         status = self.broker.submit(intent)
         logger.info(
             "order_result",
-            extra={"status": status.status.value, "message": status.message},
+            extra={"status": status.status.value, "order_message": status.message},
         )
         if status.fills:
             self.risk.record_fill()
